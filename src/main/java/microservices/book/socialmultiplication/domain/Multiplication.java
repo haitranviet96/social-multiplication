@@ -13,7 +13,6 @@ import javax.persistence.Id;
 /**
  * This class represents a Multiplication (a * b).
  */
-@RequiredArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
