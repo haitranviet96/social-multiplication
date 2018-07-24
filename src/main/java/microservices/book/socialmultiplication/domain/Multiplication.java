@@ -1,26 +1,9 @@
 package microservices.book.socialmultiplication.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 /**
  * This class represents a Multiplication (a * b).
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@Entity
 public final class Multiplication {
-    @Id
-    @GeneratedValue
-    @Column(name = "MULTIPLICATION_ID")
     private Long id;
 
     // Both factors
@@ -30,5 +13,22 @@ public final class Multiplication {
     // Empty constructor for JSON (de)serialization
     Multiplication() {
         this(0, 0);
+    }
+
+    public Multiplication(int factorA, int factorB) {
+        this.factorA = factorA;
+        this.factorB = factorB;
+    }
+
+    public int getFactorA() {
+        return factorA;
+    }
+
+    public int getFactorB() {
+        return factorB;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

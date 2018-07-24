@@ -18,7 +18,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static microservices.book.socialmultiplication.controller.MultiplicationResultAttemptController.ResultResponse;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -36,7 +37,10 @@ public class MultiplicationResultAttemptControllerTest {
 
     // This object will be magically initialized by the initFields method below.
     private JacksonTester<MultiplicationResultAttempt> jsonResult;
-    private JacksonTester<ResultResponse> jsonResponse;
+    private JacksonTester<List<MultiplicationResultAttempt>> jsonResponse;
+
+    public MultiplicationResultAttemptControllerTest() {
+    }
 
     @Before
     public void setup() {
@@ -53,11 +57,9 @@ public class MultiplicationResultAttemptControllerTest {
         genericParameterizedTest(false);
     }
 
-    void genericParameterizedTest(final boolean correct) throws Exception {
+    private void genericParameterizedTest(final boolean correct) throws Exception {
         // given (remember we're not testing here the service itself)
-        given(multiplicationService
-                .checkAttempt(any(MultiplicationResultAttempt.class)))
-                .willReturn(correct);
+        given(multiplicationService.checkAttempt(any(MultiplicationResultAttempt.class))).willReturn(correct);
         User user = new User("john");
         Multiplication multiplication = new Multiplication(50, 70);
         MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(
@@ -73,10 +75,8 @@ public class MultiplicationResultAttemptControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.getContentAsString()).isEqualTo(
                 jsonResult.write(
-                        new MultiplicationResultAttempt(attempt.getUser(),
-                                attempt.getMultiplication(),
-                                attempt.getResultAttempt(),
-                                correct)
+                        new MultiplicationResultAttempt(attempt.getUser(),attempt.getMultiplication(),
+                                attempt.getResultAttempt(),correct)
                 ).getJson());
     }
 

@@ -1,7 +1,5 @@
 package microservices.book.socialmultiplication.service;
 
-import microservices.book.socialmultiplication.domain.Multiplication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

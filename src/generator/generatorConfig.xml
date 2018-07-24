@@ -1,0 +1,50 @@
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="postgresql-42.2.4.jar" />
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/springbootdb"
+                        userId="postgres"
+                        password="hai12345">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="microservices.book.socialmultiplication.domain" targetProject="../main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="microservices.book.socialmultiplication.mapper"  targetProject="../main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="microservices.book.socialmultiplication.mapper"  targetProject="../main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table schema="" tableName="user" domainObjectName="User" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="DB2" identity="true" />
+        </table>
+
+        <table schema="" tableName="multiplication" domainObjectName="Multiplication" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="DB2" identity="true" />
+        </table>
+
+        <table schema="" tableName="multiplication_result_attempt" domainObjectName="MultiplicationResultAttempt" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="DB2" identity="true" />
+            <columnOverride column="user_id" property="userId" />
+            <columnOverride column="multiplication_id" property="multiplicationId" />
+            <columnOverride column="result_attempt" property="resultAttempt" />
+        </table>
+
+    </context>
+</generatorConfiguration>

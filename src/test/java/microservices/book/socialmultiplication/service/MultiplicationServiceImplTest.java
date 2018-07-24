@@ -3,8 +3,9 @@ package microservices.book.socialmultiplication.service;
 import microservices.book.socialmultiplication.domain.Multiplication;
 import microservices.book.socialmultiplication.domain.MultiplicationResultAttempt;
 import microservices.book.socialmultiplication.domain.User;
-import microservices.book.socialmultiplication.repository.MultiplicationResultAttemptRepository;
-import microservices.book.socialmultiplication.repository.UserRepository;
+import microservices.book.socialmultiplication.mapper.MultiplicationMapper;
+import microservices.book.socialmultiplication.mapper.MultiplicationResultAttemptMapper;
+import microservices.book.socialmultiplication.mapper.UserMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 public class MultiplicationServiceImplTest {
 
@@ -23,16 +25,20 @@ public class MultiplicationServiceImplTest {
     private RandomGeneratorService randomGeneratorService;
 
     @Mock
-    private MultiplicationResultAttemptRepository attemptRepository;
+    private MultiplicationResultAttemptMapper attemptRepository;
 
     @Mock
-    private UserRepository userRepository;
+    private UserMapper userMapper;
+
+    @Mock
+    private MultiplicationMapper multiplicationMapper;
 
     @Before
     public void setUp() {
         // With this call to initMocks we tell Mockito to process the annotations
         MockitoAnnotations.initMocks(this);
-        multiplicationServiceImpl = new MultiplicationServiceImpl(randomGeneratorService, attemptRepository, userRepository);
+        multiplicationServiceImpl = new MultiplicationServiceImpl(randomGeneratorService, multiplicationMapper,
+                attemptRepository, userMapper);
     }
 
     @Test
@@ -56,7 +62,7 @@ public class MultiplicationServiceImplTest {
         User user = new User("hai_tran");
         MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000, false);
         MultiplicationResultAttempt verifiedAttempt = new MultiplicationResultAttempt(user, multiplication, 3000, true);
-        given(userRepository.findByAlias("hai_tran")).willReturn(Optional.empty());
+        given(userMapper.findByAlias("hai_tran")).willReturn(null);
 
         // when
         boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
@@ -72,7 +78,7 @@ public class MultiplicationServiceImplTest {
         Multiplication multiplication = new Multiplication(50, 60);
         User user = new User("hai_tran");
         MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010, false);
-        given(userRepository.findByAlias("hai_tran")).willReturn(Optional.empty());
+        given(userMapper.findByAlias("hai_tran")).willReturn(null);
 
         // when
         boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
