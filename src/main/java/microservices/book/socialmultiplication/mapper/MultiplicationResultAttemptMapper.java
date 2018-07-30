@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * This interface allow us to store and retrieve attempts
  */
+@Mapper
 @Repository
 public interface MultiplicationResultAttemptMapper {
     /**

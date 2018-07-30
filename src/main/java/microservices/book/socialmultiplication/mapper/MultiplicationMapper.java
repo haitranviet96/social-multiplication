@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 /**
  * This interface allows us to save and retrieve Multiplications
  */
+@Mapper
 @Repository
 public interface MultiplicationMapper {
     @Select("INSERT INTO multiplication (factora, factorb) " +
