@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="microservices.book.socialmultiplication.mapper.MultiplicationMapper">
+    <resultMap id="BaseResultMap" autoMapping="true" type="microservices.book.socialmultiplication.domain.Multiplication">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="factora" jdbcType="SMALLINT" property="factorA"/>
+        <result column="factorb" jdbcType="SMALLINT" property="factorB"/>
+    </resultMap>
+</mapper>

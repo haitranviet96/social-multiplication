@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="microservices.book.gamification.mapper.BadgeCardMapper">
+    <resultMap id="BaseResultMap" autoMapping="true" type="microservices.book.gamification.domain.BadgeCard">
+        <id column="badge_id" jdbcType="BIGINT" property="badgeId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="badge_ts" jdbcType="BIGINT" property="badgeTimestamp"/>
+        <result column="badge" javaType="microservices.book.gamification.domain.Badge" property="badge"/>
+    </resultMap>
+</mapper>
