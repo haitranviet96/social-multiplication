@@ -19,9 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyLong;
 
-/**
- * @author moises.macero
- */
 public class GameServiceImplTest {
 
     private GameServiceImpl gameService;
